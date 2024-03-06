@@ -1,0 +1,30 @@
+name: test-flight-tracker
+version: '1.0'
+summary: Check the status of any recent flight.
+description: |
+  Get information about a flight:-
+    $ test-flight-tracker
+
+confinement: strict
+base: core20
+grade: stable
+
+apps:
+  test-flight-tracker:
+    command: flight-tracker.js
+    plugs:
+      - network
+      - home
+
+parts:
+  test-flight-tracker-dump:
+    plugin: dump
+    source: .
+    organize:
+      _env: .env
+
+  test-flight-tracker-npm:
+    plugin: npm
+    source: .
+    npm-node-version: 12.22.9
+
